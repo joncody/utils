@@ -18,12 +18,11 @@ A lightweight, utility library offering common type checks, deep copying, data c
 
 ## 📦 Installation
 
-Include it in your project:
-
+Dependency: [ease](https://github.com/joncody/ease)
+Include it in your project.
 Import as a module:
 
 ```js
-import ease from './ease.js';
 import utils from './utils.js';
 ```
 
