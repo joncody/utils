@@ -20,12 +20,7 @@ A lightweight, dependency-free utility library offering common type checks, deep
 
 Include it in your project:
 
-```bash
-# Directly download or clone
-git clone https://github.com/your-username/your-repo.git
-```
-
-Or import as a module:
+Import as a module:
 
 ```js
 import utils from './utils.js';
