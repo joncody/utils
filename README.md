@@ -1,6 +1,6 @@
 # `utils.js` – Universal JavaScript Utility Library
 
-A lightweight, dependency-free utility library offering common type checks, deep copying, data conversion, DOM utilities, polyfills, and more — all in one powerful module.
+A lightweight, utility library offering common type checks, deep copying, data conversion, DOM utilities, polyfills, and more — all in one powerful module.
 
 ---
 
@@ -23,6 +23,7 @@ Include it in your project:
 Import as a module:
 
 ```js
+import ease from './ease.js';
 import utils from './utils.js';
 ```
 
