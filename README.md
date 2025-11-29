@@ -1,6 +1,6 @@
 # `utils.js` – Universal JavaScript Utility Library
 
-A lightweight, utility library offering common type checks, deep copying, data conversion, DOM utilities, polyfills, and more — all in one powerful module.
+A lightweight, utility library offering common type checks, deep copying, data conversion, DOM utilities, easing functions, and polyfills — all in one powerful module.
 
 ---
 
@@ -9,17 +9,18 @@ A lightweight, utility library offering common type checks, deep copying, data c
 - 🔍 Type utilities: `isArray`, `isTypedArray`, `isBuffer`, etc.
 - 🔄 Data conversion: `toArray`, `toUint8`, `toBuffer`, etc.
 - 🧠 Object manipulation: `copy`, `extend`, `each`, `inherits`
+- 📈 Animation: Built-in Easing functions for smooth animations
 - 🧾 String utilities: `supplant`, `uuid`, casing functions
 - 🌐 DOM support: `getStyle`, `getPosition`, `select`, `scrollIntoView`
 - ⚙️ Polyfills: `ArrayBuffer.slice`, `Number.isNaN`
-- 📦 No dependencies, fully tree-shakable, modern ES module
+- 📦 **Zero dependencies**, fully tree-shakable, modern ES module
 
 ---
 
 ## 📦 Installation
 
-Dependency: [ease](https://github.com/joncody/ease)
-Include it in your project.
+Copy `utils.js` into your project.
+
 Import as a module:
 
 ```js
@@ -33,9 +34,12 @@ import utils from './utils.js';
 ```js
 utils.isArray([1, 2, 3]); // true
 utils.toUint8("ABC");     // Uint8Array([65, 66, 67])
-utils.copy({ a: 1 });      // deep clone
+utils.copy({ a: { b: 1 } }); // Deep clone
 utils.supplant("Hi {name}", { name: "Alice" }); // "Hi Alice"
 utils.uuid();              // "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+
+// Use built-in easing
+utils.scrollToTop(document.body, utils.ease.easeOutExpo);
 ```
 
 ---
@@ -85,12 +89,22 @@ utils.uuid();              // "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
 
 | Function | Description |
 |----------|-------------|
-| `copy(value)` | Performs deep clone of arrays/objects |
-| `extend(target, source, [overwrite=true])` | Shallow merges `source` into `target` |
+| `copy(value)` | Performs **deep clone** of arrays/objects |
+| `extend(target, source, [overwrite=true])` | **Deep merges** `source` into `target` |
 | `inherits(ctor, superCtor)` | Classical inheritance via prototype chain |
 | `inArray(array, value)` | Returns `true` if value exists in array |
 | `noop()` | A no-op function |
 | `each(items, fn, [thisArg])` | Iterates over arrays, objects, or DOM nodes |
+
+---
+
+### 📈 Easing Functions
+
+Access via `utils.ease`.
+Usage: `utils.ease.easeInQuad(t, b, c, d)`
+
+**Available functions:**
+`linearTween`, `easeInQuad`, `easeOutQuad`, `easeInOutQuad`, `easeInCubic`, `easeOutCubic`, `easeInOutCubic`, `easeInQuart`, `easeOutQuart`, `easeInOutQuart`, `easeInQuint`, `easeOutQuint`, `easeInOutQuint`, `easeInSine`, `easeOutSine`, `easeInOutSine`, `easeInExpo`, `easeOutExpo`, `easeInOutExpo`, `easeInCirc`, `easeOutCirc`, `easeInOutCirc`.
 
 ---
 
@@ -121,6 +135,8 @@ utils.uuid();              // "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
 |----------|-------------|
 | `scrollIntoView(node, [easingFn])` | Smoothly scrolls to a node |
 | `scrollToTop(node, [easingFn])` | Smooth scrolls to top of scrollable container |
+
+*Note: If `easingFn` is omitted, `easeInOutSine` is used.*
 
 ---
 
