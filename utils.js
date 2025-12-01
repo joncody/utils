@@ -1,5 +1,7 @@
 "use strict";
 
+const global = typeof globalThis !== "undefined" ? globalThis : (typeof window !== "undefined" ? window : this);
+
 if (ArrayBuffer.prototype.slice === undefined) {
     ArrayBuffer.prototype.slice = function (start, end) {
         let that = new Uint8Array(this);
@@ -19,11 +21,11 @@ if (ArrayBuffer.prototype.slice === undefined) {
     };
 }
 
-Number.isNaN = Number.isNaN || function (value) {
-    return value !== value;
-};
-
-const global = globalThis || window || this;
+if (Number.isNaN === undefined) {
+    Number.isNaN = function (value) {
+        return typeof value === 'number' && value !== value;
+    };
+}
 
 const ease = Object.freeze({
     linearTween: function (t, b, c, d) {
@@ -138,15 +140,30 @@ const ease = Object.freeze({
     }
 });
 
+/*
 function typeOf(value) {
     let type = typeof value;
 
     if (Array.isArray(value)) {
-        type = "array";
-    } else if (value === null) {
-        type = "null";
+        return "array";
     }
-    return type;
+    if (value === null) {
+        return "null";
+    }
+    if (type !== "object") {
+        return type;
+    }
+    return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
+}
+*/
+
+function typeOf(value) {
+    if (Array.isArray(value)) {
+        return "array";
+    } else if (value === null) {
+        return "null";
+    }
+    return typeof value;
 }
 
 function arrSlice(value, begin, end) {
